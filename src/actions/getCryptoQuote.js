@@ -1,6 +1,6 @@
 import types from "./types";
-import fetcher from "utils/fetcher";
 import formatMoney from "utils/formatMoney";
+import { getQuote } from "./common";
 
 function setCryptoPrice(id, price) {
   return {
@@ -14,9 +14,7 @@ function setCryptoPrice(id, price) {
 
 export function fetchCryptoQuote(id) {
   return function (dispatch) {
-    return fetcher(
-      `https://www.stackadapt.com/coinmarketcap/quotes?id=${id}&aux=cmc_rank`
-    ).then((resp) => {
+    return getQuote(id).then((resp) => {
       if (resp.status.error_code === 0) {
         const price = formatMoney(
           Object.entries(resp.data)[0][1]?.quote["USD"].price

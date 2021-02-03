@@ -1,6 +1,7 @@
 import types from "./types";
 import fetcher from "utils/fetcher";
 import formatMoney from "utils/formatMoney";
+import { getQuote } from "./common";
 
 function setCryptoData(payload) {
   return {
@@ -17,12 +18,6 @@ function appendCryptoData(page, data) {
       data
     }
   };
-}
-
-function getQuote(id) {
-  return fetcher(
-    `https://www.stackadapt.com/coinmarketcap/quotes?id=${id}&aux=cmc_rank`
-  );
 }
 
 export function fetchCryptoData(page, initial) {
